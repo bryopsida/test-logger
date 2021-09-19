@@ -5,7 +5,8 @@ const jsonLogger = winston.createLogger({
   format: winston.format.json(),
   defaultMeta: { service: 'json-service' },
   transports: [
-      new winston.transports.Console()
+      new winston.transports.Console(),
+      new winston.transports.File({ filename: 'app.log' }),
   ]
 });
 
@@ -23,11 +24,11 @@ const plainLogger = winston.createLogger({
 
 const plainInterval = setInterval(() =>  {
     plainLogger.info('plain logger');
-}, process.env.TEXT_LOG_INTERVAL || 1000);
+}, process.env.TEXT_LOG_INTERVAL || 10000);
 
 const jsonInterval = setInterval(() =>  {
     jsonLogger.info('json logger');
-}, process.env.JSON_LOG_INTERVAL || 1000);
+}, process.env.JSON_LOG_INTERVAL || 10000);
 
 process.on('SIGINT', () => {
     clearInterval(plainInterval);
