@@ -6,7 +6,7 @@ const jsonLogger = winston.createLogger({
   defaultMeta: { service: 'json-service' },
   transports: [
       new winston.transports.Console(),
-      new winston.transports.File({ filename: 'app.log' }),
+      new winston.transports.File({ filename: '/tmp/app.log' }),
   ]
 });
 
