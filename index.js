@@ -30,9 +30,11 @@ const plainLogger = winston.createLogger({
     ]
   });
 
-const plainInterval = setInterval(() =>  {
-    plainLogger.info('plain logger');
-}, process.env.TEXT_LOG_INTERVAL || 10000);
+if (process.env.TEXT_LOG_ENABLED !== 'false') {
+  const plainInterval = setInterval(() =>  {
+      plainLogger.info('plain logger');
+  }, process.env.TEXT_LOG_INTERVAL || 10000);
+}
 
 const jsonInterval = setInterval(() =>  {
     jsonLogger.info('json logger');
