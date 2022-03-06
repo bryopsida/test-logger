@@ -44,8 +44,13 @@ const fileInterval = setInterval(() => {
     fileLogger.info('file logger');
 }, process.env.FILE_LOG_INTERVAL || 10000);
 
+const oneMinuteLoggeInterval = setInterval(() => {
+  jsonLogger.info('1 Minute Marker');
+}, 60000);
+
 process.on('SIGINT', () => {
-    clearInterval(plainInterval);
-    clearInterval(jsonInterval);
-    clearInterval(fileInterval);
+  clearInterval(jsonInterval);
+  clearInterval(fileInterval);
+  clearInterval(oneMinuteLoggeInterval);
+  clearInterval(plainInterval);
 });
